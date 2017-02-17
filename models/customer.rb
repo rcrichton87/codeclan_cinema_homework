@@ -40,33 +40,6 @@ class Customer
     return Customer.new(customer)
   end
 
-  #update
-
-  def update
-    sql = "UPDATE customers SET (name, funds) = ('#{@name}', #{@funds}) WHERE id = #{@id};"
-    SqlRunner.run(sql)
-  end
-
-  #delete
-
-  def self.delete_all
-    sql = "DELETE FROM customers;"
-    SqlRunner.run(sql)
-  end
-
-  def delete
-    sql = "DELETE from customers WHERE id = #{@id};"
-    SqlRunner.run(sql)
-  end
-
-  def buy_ticket(film, time)
-    @funds -= film.price
-    self.update
-    new_ticket_hash = {'customer_id' => @id, 'film_id' => film.id, 'time' => time}
-    ticket = Ticket.new(new_ticket_hash)
-    ticket.save
-  end
-
   def films
     sql = "SELECT films.* FROM films
     INNER JOIN tickets ON tickets.film_id = films.id
@@ -82,6 +55,33 @@ class Customer
   def number_of_tickets
     number_of_tickets = self.tickets.length
     return number_of_tickets
+  end
+
+  #update
+
+  def update
+    sql = "UPDATE customers SET (name, funds) = ('#{@name}', #{@funds}) WHERE id = #{@id};"
+    SqlRunner.run(sql)
+  end
+
+  def buy_ticket(film, time)
+    @funds -= film.price
+    self.update
+    new_ticket_hash = {'customer_id' => @id, 'film_id' => film.id, 'time' => time}
+    ticket = Ticket.new(new_ticket_hash)
+    ticket.save
+  end
+
+  #delete
+
+  def self.delete_all
+    sql = "DELETE FROM customers;"
+    SqlRunner.run(sql)
+  end
+
+  def delete
+    sql = "DELETE from customers WHERE id = #{@id};"
+    SqlRunner.run(sql)
   end
 
 end

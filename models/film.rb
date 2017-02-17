@@ -37,6 +37,13 @@ class Film
     return self.get_many(sql)
   end
 
+  def customers
+    sql = "SELECT customers.* FROM customers
+    INNER JOIN tickets ON customers.id = tickets.customer_id
+    WHERE tickets.film_id = #{@id};"
+    Customer.get_many(sql)
+  end
+
   def update
     sql = "UPDATE films SET (title, price, available_tickets) = ('#{@title}', #{@price}, #{@available_tickets}) WHERE id = #{@id};"
     SqlRunner.run(sql)
@@ -51,5 +58,7 @@ class Film
     sql = "DELETE FROM films WHERE id = #{@id};"
     SqlRunner.run(sql)
   end
+
+
 
 end
