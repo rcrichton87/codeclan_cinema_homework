@@ -74,4 +74,9 @@ class Customer
     Film.get_many(sql)
   end
 
+  def tickets
+    sql = "SELECT * FROM tickets WHERE customer_id = #{@id};"
+    Ticket.get_many(sql)
+  end
+
 end
