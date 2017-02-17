@@ -36,6 +36,11 @@ class Ticket
     return Ticket.new(ticket)
   end
 
+  def update
+    sql = "UPDATE tickets SET (time) = ('#{@time}') WHERE id = #{@id};"
+    SqlRunner.run(sql)
+  end
+
   def self.delete_all
     sql = "DELETE FROM tickets;"
     SqlRunner.run(sql)
