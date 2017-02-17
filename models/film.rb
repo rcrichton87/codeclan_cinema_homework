@@ -26,6 +26,12 @@ class Film
     @id = film['id'].to_i
   end
 
+  def self.find_by_id(id)
+    sql = "SELECT * FROM films WHERE id = #{id};"
+    film = SqlRunner.run(sql).first
+    return Film.new(film)
+  end
+
   def update
     sql = "UPDATE films SET (title, price, available_tickets) = ('#{@title}', #{@price}, #{@available_tickets}) WHERE id = #{@id};"
     SqlRunner.run(sql)
