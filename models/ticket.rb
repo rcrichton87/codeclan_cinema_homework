@@ -30,6 +30,12 @@ class Ticket
     return self.get_many(sql)
   end
 
+  def self.find_by_id(id)
+    sql = "SELECT * from tickets WHERE id = #{id};"
+    ticket = SqlRunner.run(sql).first
+    return Ticket.new(ticket)
+  end
+
   def self.delete_all
     sql = "DELETE FROM tickets;"
     SqlRunner.run(sql)
