@@ -42,6 +42,12 @@ class Ticket
     return Customer.new(customer)
   end
 
+  def film
+    sql = "SELECT * from films WHERE id = #{@film_id};"
+    film = SqlRunner.run(sql).first
+    return Film.new(film)
+  end
+
   def update
     sql = "UPDATE tickets SET (time) = ('#{@time}') WHERE id = #{@id};"
     SqlRunner.run(sql)
