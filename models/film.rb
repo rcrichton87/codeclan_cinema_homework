@@ -14,6 +14,12 @@ class Film
     @available_tickets = options['available_tickets'].to_i
   end
 
+  def self.get_many(sql)
+    films = SqlRunner.run(sql)
+    result = films.map{|film| Film.new(film)}
+    return result
+  end
+
   def save
     sql = "INSERT INTO films (title, price, available_tickets) VALUES ('#{@title}', #{@price}, #{@available_tickets})  RETURNING *;"
     film = SqlRunner.run(sql).first
