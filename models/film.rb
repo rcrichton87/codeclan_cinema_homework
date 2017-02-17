@@ -54,6 +54,22 @@ class Film
     return number_of_customers
   end
 
+  def most_popular_time
+    tickets = self.tickets #make an array of all tickets for the film
+    most_popular_ticket = []
+    while tickets.length != 0
+      search_ticket = tickets[0] #search based on the first ticket in the array
+      tickets_at_time = tickets.find_all {|ticket| ticket.time == search_ticket.time} #put all tickets matching the search ticket's time in an array
+      if tickets_at_time.length > most_popular_ticket.length #if the length of the array of found tickets is larger than the current most popular
+        most_popular_ticket = tickets_at_time
+      end
+      tickets.shift #remove the first item now that it's been searched
+    end
+    return most_popular_ticket[0].time
+  end
+
+  #for each of array of ticket objexts, get the time and find all identical times, save the length
+
   def update
     sql = "UPDATE films SET (title, price, available_tickets) = ('#{@title}', #{@price}, #{@available_tickets}) WHERE id = #{@id};"
     SqlRunner.run(sql)
