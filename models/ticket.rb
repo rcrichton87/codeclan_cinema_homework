@@ -14,11 +14,20 @@ class Ticket
     @time = options['time']
   end
 
+  def get_many(sql)
+    tickets = SqlRunner.run(sql)
+    return tickets.map{|ticket| ticket.new(ticket)}
+  end
+
   def save
     sql = "INSERT INTO tickets (customer_id, film_id, time) VALUES (#{@customer_id}, #{@film_id}, '#{@time}') RETURNING *;"
     ticket = SqlRunner.run(sql).first
     @id = ticket['id'].to_i
   end 
+
+  # def self.all
+
+  # end
 
   def self.delete_all
     sql = "DELETE FROM tickets;"
