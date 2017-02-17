@@ -68,6 +68,9 @@ class Customer
     if @funds < film.price
       puts "You can't afford a ticket!"
       return
+    elsif film.tickets.length >= film.available_tickets
+      puts "No more tickets are available!"
+      return
     else
       @funds -= film.price
       self.update
