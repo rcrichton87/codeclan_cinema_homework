@@ -14,9 +14,9 @@ class Ticket
     @time = options['time']
   end
 
-  def get_many(sql)
+  def self.get_many(sql)
     tickets = SqlRunner.run(sql)
-    return tickets.map{|ticket| ticket.new(ticket)}
+    return tickets.map{|ticket| Ticket.new(ticket)}
   end
 
   def save
@@ -25,9 +25,10 @@ class Ticket
     @id = ticket['id'].to_i
   end 
 
-  # def self.all
-
-  # end
+  def self.all
+    sql = "SELECT * FROM tickets;"
+    return self.get_many(sql)
+  end
 
   def self.delete_all
     sql = "DELETE FROM tickets;"
