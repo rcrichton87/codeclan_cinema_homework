@@ -59,4 +59,12 @@ class Customer
     SqlRunner.run(sql)
   end
 
+  def buy_ticket(film, time)
+    @funds -= film.price
+    self.update
+    new_ticket_hash = {'customer_id' => @id, 'film_id' => film.id, 'time' => time}
+    ticket = Ticket.new(new_ticket_hash)
+    ticket.save
+  end
+
 end
