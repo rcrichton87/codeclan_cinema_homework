@@ -15,9 +15,14 @@ class Ticket
   end
 
   def save
-    sql = "INSERT INTO ticket (customer_id, film_id, time) VALUES (#{@customer_id}, #{@film_id}, '#{@time}') RETURNING *;"
+    sql = "INSERT INTO tickets (customer_id, film_id, time) VALUES (#{@customer_id}, #{@film_id}, '#{@time}') RETURNING *;"
     ticket = SqlRunner.run(sql).first
     @id = ticket['id'].to_i
   end 
+
+  def self.delete_all
+    sql = "DELETE FROM tickets;"
+    SqlRunner.run(sql)
+  end
 
 end
