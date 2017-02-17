@@ -13,12 +13,12 @@ class Customer
     @funds = options['funds'].to_i
   end
 
-  def get_many(sql)
+  def self.get_many(sql)
     customers = SqlRunner.run(sql)
     result = customers.map{|customer| Customer.new(customer)}
     return result
   end
-  
+
   #create
 
   def save
@@ -29,9 +29,10 @@ class Customer
 
   #read
 
-  # def self.all
-
-  # end
+  def self.all
+    sql = "SELECT * FROM customers;"
+    return self.get_many(sql)
+  end
 
   #update
 
