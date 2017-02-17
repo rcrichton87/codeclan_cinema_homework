@@ -19,4 +19,9 @@ def save
   @id = customer['id'].to_i
 end
 
+def self.delete_all
+  sql = "DELETE FROM customers;"
+  SqlRunner.run(sql)
+end
+
 end
