@@ -13,11 +13,29 @@ class Customer
     @funds = options['funds'].to_i
   end
 
+  def get_many(sql)
+    customers = SqlRunner.run(sql)
+    result = customers.map{|customer| Customer.new(customer)}
+    return result
+  end
+  
+  #create
+
   def save
     sql = "INSERT INTO customers (name, funds) VALUES ('#{@name}', #{@funds}) RETURNING *;"
     customer = SqlRunner.run(sql).first
     @id = customer['id'].to_i
   end
+
+  #read
+
+  # def self.all
+
+  # end
+
+  #update
+
+  #delete
 
   def self.delete_all
     sql = "DELETE FROM customers;"
