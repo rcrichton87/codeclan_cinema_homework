@@ -65,11 +65,16 @@ class Customer
   end
 
   def buy_ticket(film, time)
-    @funds -= film.price
-    self.update
-    new_ticket_hash = {'customer_id' => @id, 'film_id' => film.id, 'time' => time}
-    ticket = Ticket.new(new_ticket_hash)
-    ticket.save
+    if @funds < film.price
+      puts "You can't afford a ticket!"
+      return
+    else
+      @funds -= film.price
+      self.update
+      new_ticket_hash = {'customer_id' => @id, 'film_id' => film.id, 'time' => time}
+      ticket = Ticket.new(new_ticket_hash)
+      ticket.save
+    end
   end
 
   #delete

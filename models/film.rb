@@ -65,10 +65,8 @@ class Film
       end
       tickets.shift #remove the first item now that it's been searched
     end
-    return most_popular_ticket[0].time
+    return most_popular_ticket[0].time #all times in the array will be the same, return the first
   end
-
-  #for each of array of ticket objexts, get the time and find all identical times, save the length
 
   def update
     sql = "UPDATE films SET (title, price, available_tickets) = ('#{@title}', #{@price}, #{@available_tickets}) WHERE id = #{@id};"
