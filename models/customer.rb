@@ -34,6 +34,12 @@ class Customer
     return self.get_many(sql)
   end
 
+  def self.find_by_id(id)
+    sql = "SELECT * from customers WHERE id = #{id};"
+    customer = SqlRunner.run(sql).first
+    return Customer.new(customer)
+  end
+
   #update
 
   def update
@@ -51,7 +57,6 @@ class Customer
   def delete
     sql = "DELETE from customers WHERE id = #{@id};"
     SqlRunner.run(sql)
-
   end
 
 end
