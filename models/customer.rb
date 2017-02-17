@@ -79,4 +79,9 @@ class Customer
     Ticket.get_many(sql)
   end
 
+  def number_of_tickets
+    number_of_tickets = self.tickets.length
+    return number_of_tickets
+  end
+
 end
