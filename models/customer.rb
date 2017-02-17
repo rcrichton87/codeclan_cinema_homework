@@ -36,6 +36,11 @@ class Customer
 
   #update
 
+  def update
+    sql = "UPDATE customers SET (name, funds) = ('#{@name}', #{@funds}) WHERE id = #{@id};"
+    SqlRunner.run(sql)
+  end
+
   #delete
 
   def self.delete_all
