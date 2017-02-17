@@ -13,4 +13,10 @@ def initialize(options)
   @funds = options['funds'].to_i
 end
 
+def save
+  sql = "INSERT INTO customers (name, funds) VALUES ('#{@name}', #{@funds}) RETURNING *;"
+  customer = SqlRunner.run(sql).first
+  @id = customer['id'].to_i
+end
+
 end
