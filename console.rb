@@ -3,7 +3,7 @@ require_relative('./models/customer.rb')
 require_relative('./models/film.rb')
 require_relative('./models/ticket.rb')
 
-#Ticket.delete_all
+Ticket.delete_all
 Customer.delete_all
 Film.delete_all
 
@@ -30,6 +30,27 @@ film3.save
 
 film4 = Film.new({'title' => 'Spirited Away', 'price' => 20, 'available_tickets' => 3})
 film4.save
+
+ticket1 = Ticket.new({'customer_id' => customer1.id, 'film_id' => film1.id, 'time' => '20:00'})
+ticket1.save
+
+ticket2 = Ticket.new({'customer_id' => customer1.id, 'film_id' => film3.id, 'time' => '12:00'})
+ticket2.save
+
+ticket3 = Ticket.new({'customer_id' => customer1.id, 'film_id' => film2.id, 'time' => '21:30'})
+ticket3.save
+
+ticket4 = Ticket.new({'customer_id' => customer4.id, 'film_id' => film4.id, 'time' => '21:00'})
+ticket4.save
+
+ticket5 = Ticket.new({'customer_id' => customer4.id, 'film_id' => film3.id, 'time' => '12:00'})
+ticket5.save
+
+ticket6 = Ticket.new({'customer_id' => customer2.id, 'film_id' => film3.id, 'time' => '16:00'})
+ticket6.save
+
+ticket7 = Ticket.new({'customer_id' => customer2.id, 'film_id' => film4.id, 'time' => '21:00'})
+ticket7.save
 
 binding.pry
 nil
